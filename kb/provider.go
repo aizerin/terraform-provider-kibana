@@ -7,14 +7,13 @@ import (
 	kibana "github.com/disaster37/go-kibana-rest/v7"
 	"github.com/disaster37/go-kibana-rest/v7/kbapi"
 
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
-	"github.com/hashicorp/terraform-plugin-sdk/terraform"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/pkg/errors"
 	log "github.com/sirupsen/logrus"
 )
 
 // Provider define kibana provider
-func Provider() terraform.ResourceProvider {
+func Provider() *schema.Provider {
 	return &schema.Provider{
 		Schema: map[string]*schema.Schema{
 			"url": {

@@ -11,7 +11,7 @@ import (
 	kibana "github.com/disaster37/go-kibana-rest/v7"
 	"github.com/disaster37/go-kibana-rest/v7/kbapi"
 
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -211,7 +211,7 @@ func copyObject(d *schema.ResourceData, meta interface{}) error {
 		Objects:           objectsParameter,
 		IncludeReferences: includeReference,
 		Overwrite:         overwrite,
-		CreateNewCopies: createNewCopies,
+		CreateNewCopies:   createNewCopies,
 	}
 
 	err := client.API.KibanaSpaces.CopySavedObjects(parameter, sourceSpace)
