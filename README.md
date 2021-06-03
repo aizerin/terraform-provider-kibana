@@ -1,3 +1,5 @@
+Fork of **disaster37** https://github.com/disaster37/terraform-provider-kibana with simplified index_pattern resource and read only rest authentication. I will try to find some time and create PR to upstream someday.
+
 # terraform-provider-kibana
 
 [![CircleCI](https://circleci.com/gh/disaster37/terraform-provider-kibana/tree/7.x.svg?style=svg)](https://circleci.com/gh/disaster37/terraform-provider-kibana/tree/7.x)
