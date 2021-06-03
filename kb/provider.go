@@ -1,6 +1,7 @@
 package kb
 
 import (
+	"fmt"
 	"net/url"
 	"time"
 
@@ -66,12 +67,18 @@ func Provider() *schema.Provider {
 				Default:     false,
 				Description: "Enable debug log level in provider",
 			},
+			"ror": {
+				Type:     schema.TypeBool,
+				Optional: true,
+				Default:  false,
+			},
 		},
 
 		ResourcesMap: map[string]*schema.Resource{
 			"kibana_user_space":        resourceKibanaUserSpace(),
 			"kibana_role":              resourceKibanaRole(),
 			"kibana_object":            resourceKibanaObject(),
+			"kibana_index_pattern":     resourceKibanaIndexPattern(),
 			"kibana_logstash_pipeline": resourceKibanaLogstashPipeline(),
 			"kibana_copy_object":       resourceKibanaCopyObject(),
 		},
@@ -94,6 +101,7 @@ func providerConfigure(d *schema.ResourceData) (interface{}, error) {
 	retry := d.Get("retry").(int)
 	waitBeforeRetry := d.Get("wait_before_retry").(int)
 	debug := d.Get("debug").(bool)
+	ror := d.Get("ror").(bool)
 
 	if debug {
 		log.SetLevel(log.DebugLevel)
@@ -113,7 +121,7 @@ func providerConfigure(d *schema.ResourceData) (interface{}, error) {
 		cfg.Username = username
 		cfg.Password = password
 	}
-	if insecure == true {
+	if insecure {
 		cfg.DisableVerifySSL = true
 	}
 
@@ -122,11 +130,27 @@ func providerConfigure(d *schema.ResourceData) (interface{}, error) {
 		return nil, err
 	}
 
+	if ror {
+		response, respErr := client.Client.R().Post("/login")
+		log.Debug("Login error: ", respErr)
+		log.Debug("Login response: ", response)
+		if respErr != nil {
+			panic(respErr)
+		}
+		if response.StatusCode() != 200 {
+			panic(fmt.Sprintf("Login error response: %d", response.StatusCode()))
+		}
+		for _, v := range response.Cookies() {
+			if v.Name == "rorCookie" {
+				client.Client.SetCookie(v)
+			}
+		}
+	}
 	// Test connexion and check kibana version
 	nbFailed := 0
 	isOnline := false
 	var kibanaStatus kbapi.KibanaStatus
-	for isOnline == false {
+	for !isOnline {
 		kibanaStatus, err = client.API.KibanaStatus.Get()
 		if err == nil {
 			isOnline = true
