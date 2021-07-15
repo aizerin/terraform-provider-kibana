@@ -4,6 +4,7 @@ go 1.15
 
 require (
 	github.com/disaster37/go-kibana-rest/v7 v7.12.1-3
+	github.com/go-resty/resty/v2 v2.6.0 // indirect
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.4.3
 	github.com/onsi/ginkgo v1.16.4 // indirect
 	github.com/onsi/gomega v1.13.0 // indirect

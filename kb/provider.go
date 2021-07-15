@@ -79,6 +79,7 @@ func Provider() *schema.Provider {
 			"kibana_role":              resourceKibanaRole(),
 			"kibana_object":            resourceKibanaObject(),
 			"kibana_index_pattern":     resourceKibanaIndexPattern(),
+			"kibana_logs_pattern":      resourceKibanaLogsPattern(),
 			"kibana_logstash_pipeline": resourceKibanaLogstashPipeline(),
 			"kibana_copy_object":       resourceKibanaCopyObject(),
 		},
