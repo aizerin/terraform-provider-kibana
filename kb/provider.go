@@ -67,6 +67,8 @@ func Provider() *schema.Provider {
 			"kibana_object":            resourceKibanaObject(),
 			"kibana_logstash_pipeline": resourceKibanaLogstashPipeline(),
 			"kibana_copy_object":       resourceKibanaCopyObject(),
+			"kibana_index_pattern":     resourceKibanaIndexPattern(),
+			"kibana_logs_pattern":      resourceKibanaLogsPattern(),
 		},
 
 		ConfigureFunc: providerConfigure,

@@ -22,3 +22,4 @@ terraform-provider-kibana
 *.tfstate.*
 .terraform
 registry/
+__debug_bin

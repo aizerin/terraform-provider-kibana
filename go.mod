@@ -1,9 +1,10 @@
-module github.com/disaster37/terraform-provider-kibana/v7
+module github.com/aizerin/terraform-provider-kibana/v7
 
 go 1.16
 
 require (
 	github.com/disaster37/go-kibana-rest/v7 v7.12.1-3
+	github.com/go-resty/resty/v2 v2.6.0 // indirect
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.7.1
 	github.com/onsi/gomega v1.16.0 // indirect
 	github.com/pkg/errors v0.9.1

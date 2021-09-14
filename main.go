@@ -5,7 +5,7 @@ import (
 	"flag"
 	"os"
 
-	"github.com/disaster37/terraform-provider-kibana/v7/kb"
+	"github.com/aizerin/terraform-provider-kibana/v7/kb"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/plugin"
 	log "github.com/sirupsen/logrus"
 	easy "github.com/t-tomalak/logrus-easy-formatter"
@@ -31,7 +31,7 @@ func main() {
 	opts := &plugin.ServeOpts{ProviderFunc: kb.Provider}
 
 	if debugMode {
-		err := plugin.Debug(context.Background(), "registry.terraform.io/disaster37/kibana", opts)
+		err := plugin.Debug(context.Background(), "registry.terraform.io/aizerin/kibana", opts)
 
 		if err != nil {
 			log.Fatal(err.Error())
